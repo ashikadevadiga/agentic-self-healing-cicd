@@ -1,0 +1,8 @@
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0
+
+CalculatorTest.testAddition
+expected: <10> but was: <5>
+
+BUILD FAILURE
+
+Failed to execute goal maven-surefire-plugin:test

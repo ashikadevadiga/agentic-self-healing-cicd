@@ -1,2 +1,14 @@
 target/
 *.class
+# Generated runtime files
+application/maven-output.txt
+application/result.txt
+iot_failure.json
+
+# Generated runtime files
+application/maven-output.txt
+application/result.txt
+iot_failure.json
+
+__pycache__/
+*.pyc
