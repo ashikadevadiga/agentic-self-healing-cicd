@@ -1,14 +1,26 @@
-target/
-*.class
-# Generated runtime files
-application/maven-output.txt
-application/result.txt
-iot_failure.json
-
-# Generated runtime files
-application/maven-output.txt
-application/result.txt
-iot_failure.json
-
+# Python
 __pycache__/
 *.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Generated IoT data
+iot/sensor_data.json
+iot/recovery_log.json
+iot_failure.json
+
+# Maven build files
+application/target/
+
+# Generated output
+application/maven-output.txt
+application/result.txt
+
+# IDE
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,67 +1,51 @@
-import json
-import os
+def predict_failure(sensor):
 
+    print("\n====================================")
+    print("        AI PREDICTION AGENT")
+    print("====================================")
 
-FAILURE_FILE = "iot_failure.json"
+    if sensor is None:
+        print("No sensor data available.")
+        return None
 
+    temperature = sensor["temperature"]
+    humidity = sensor["humidity"]
+    vibration = sensor["vibration"]
+    voltage = sensor["voltage"]
+    current = sensor["current"]
 
-def predict_failure(monitor_data):
+    risk_level = "LOW"
+    failure_type = "NONE"
 
-    print()
-    print("===== PREDICT AGENT =====")
-
-    failure_type = monitor_data.get("failure_type", "UNKNOWN")
-
-    if failure_type == "HIGH_TEMPERATURE":
-
-        prediction = "IoT temperature threshold exceeded"
+    # Check sensor conditions
+    if temperature > 80:
         risk_level = "HIGH"
-        confidence = 95
+        failure_type = "HIGH_TEMPERATURE"
 
-    elif failure_type == "HIGH_VIBRATION":
-
-        prediction = "Abnormal vibration detected"
+    elif vibration > 8:
         risk_level = "HIGH"
-        confidence = 93
+        failure_type = "HIGH_VIBRATION"
 
-    elif failure_type == "LOW_BATTERY":
+    elif voltage < 200 or voltage > 250:
+        risk_level = "HIGH"
+        failure_type = "VOLTAGE_ANOMALY"
 
-        prediction = "IoT sensor battery level is critically low"
+    elif current > 15:
+        risk_level = "HIGH"
+        failure_type = "HIGH_CURRENT"
+
+    elif humidity > 90:
         risk_level = "MEDIUM"
-        confidence = 90
+        failure_type = "HIGH_HUMIDITY"
 
-    else:
-
-        prediction = "Unknown IoT failure detected"
-        risk_level = "MEDIUM"
-        confidence = 70
-
-    print("Prediction    :", prediction)
-    print("Risk Level    :", risk_level)
-    print("Confidence    :", str(confidence) + "%")
-    print("Failure Type  :", failure_type)
+    print(f"Risk Level  : {risk_level}")
+    print(f"Failure Type: {failure_type}")
 
     return {
-        "prediction": prediction,
         "risk_level": risk_level,
-        "confidence": confidence,
         "failure_type": failure_type
     }
 
 
 if __name__ == "__main__":
-
-    if os.path.exists(FAILURE_FILE):
-
-        with open(FAILURE_FILE, "r") as file:
-            monitor_data = json.load(file)
-
-        result = predict_failure(monitor_data)
-
-        print()
-        print("===== PREDICTION RESULT =====")
-        print(result)
-
-    else:
-
-        print("No IoT failure file found.")
+    print("Predict Agent ready.")
